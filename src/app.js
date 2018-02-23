@@ -67,25 +67,13 @@ const getAccount = () => {
             alert("your metamask is locked please unlock it");
         } else {
             console.log(result);
-            getBalance(result[0]).then((results) => {
-                console.log(results);
-            }).catch((e) => {
-                
-            });
+            getBalance(result[0]);
         }
     },(err) => {
         console.log(err);
     });
 }
 
-const getBalance = (address) => {
-      return new Promise (function (resolve, reject) {
-        web3.eth.getBalance(address, function (error, result) {
-          if (error) {
-            reject(error);
-          } else {
-            resolve(result);
-        }
-      })
-    })
+const getBalance = async (address) => {
+    console.log(await web3.eth.getBalance(address));
 }
