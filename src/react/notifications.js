@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 
 var NotificationSystem = require('react-notification-system');
-
-class Notify extends Component {
+function showMessage (data) {
+    return (() => {
+      this.setState(data)
+    });
+  }
+  
+ class Notify extends Component {
     constructor(props) {
         super(props);
-        this._notificationSystem = null
+        this._notificationSystem = null;
+        this.state = {
+            message: "welocme to binkd",
+            level: 'success'
+        }
+        this.showMessage = showMessage.bind(this);
     }
     _addNotification() {
-
         if(this._notificationSystem) {
-            this._notificationSystem.addNotification({
-                message: 'Notification message',
-                level: 'success'
-            });
+            this._notificationSystem.addNotification(this.state);
         }
     }
      
@@ -21,7 +27,11 @@ class Notify extends Component {
         this._notificationSystem = this.refs.notificationSystem;
         this._addNotification();
         console.log("componentDidMount");
-        console.log(this._notificationSystem);
+    }
+
+    componentDidUpdate() {
+        console.log("componentDidMount");
+        this._addNotification();
     }
 
     render() {
@@ -35,4 +45,5 @@ class Notify extends Component {
 }
 
 
-export default Notify;
+// export default Notify;
+module.exports = {showMessage,Notify}

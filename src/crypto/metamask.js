@@ -1,5 +1,5 @@
 import getWeb3 from './getWeb3';
-
+import {showMessage} from "../react/notifications";
 
 let web3;
 const initMetamaskFlow = () => {
@@ -9,6 +9,10 @@ const initMetamaskFlow = () => {
         console.log("=====LOGGING web3======");
         console.log(web3);
         checkMetamaskInstalled();
+        showMessage({
+            message: "metamask installed",
+            level: "success"
+        })
         // check if metamask is not installed, throw alert and exit
         // find which network is user connected to ?
         // list all user accounts from metamask
